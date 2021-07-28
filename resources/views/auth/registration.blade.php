@@ -20,10 +20,10 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <input type="text" placeholder="Email" id="email_address" class="form-control"
-                                           name="email" required autofocus>
-                                    @if ($errors->has('email'))
-                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    <input type="text" placeholder="username" id="username" class="form-control"
+                                           name="username" required autofocus>
+                                    @if ($errors->has('username'))
+                                        <span class="text-danger">{{ $errors->first('username') }}</span>
                                     @endif
                                 </div>
 

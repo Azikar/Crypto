@@ -15,9 +15,9 @@ class Assets extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('label');
             $table->string('currency');
-            $table->float('label');
+            $table->float('value');
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         });
