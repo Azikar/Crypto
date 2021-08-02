@@ -6,7 +6,7 @@ namespace App\Models\Asset;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Asset extends Model implements AssetInterface
+class Asset extends Model
 {
     public $timestamps = false;
 

@@ -21,6 +21,7 @@ use App\Services\SaveExchangeRates\CurrencyConverterInterface;
 use App\Services\SaveExchangeRates\EuToUsdConverter;
 use App\Services\SaveExchangeRates\ProcessCryptoExchangeRates;
 use App\Services\SaveExchangeRates\ProcessExchangeRatesInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,8 +47,13 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(ProcessExchangeRatesInterface::class, ProcessCryptoExchangeRates::class);
         $this->app->bind(RequestUrlBuilderInterface::class, GeckoRequestUrlBuilder::class);
+        $this->app->when([RatesRepository::class])
+        ->needs(Model::class)
+        ->give(Rates::class);
 
-        $this->app->bind(RatesInterface::class, Rates::class);
+        $this->app->when([AssetsRepository::class])
+            ->needs(Model::class)
+            ->give(Asset::class);
         $this->app->bind(RatesRepositoryInterface::class, RatesRepository::class);
 
         $this->app->bind(AssetsResourceInterface::class, AssetsResource::class);

@@ -6,7 +6,7 @@ namespace App\Models\Rates;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rates extends Model implements RatesInterface
+class Rates extends Model
 {
     protected $fillable = [
         'label',

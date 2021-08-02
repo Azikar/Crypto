@@ -34,4 +34,17 @@ class RequestFoundation extends FormRequest
     public function rules(): array {
         return [];
     }
+
+    public function getIntParam(string $key): ?int
+    {
+        return null !== $this->route($key) ? (int)$this->route($key) : null;
+    }
+
+    public function all($keys = null)
+    {
+        return array_replace_recursive(
+            parent::all(),
+            $this->route()->parameters()
+        );
+    }
 }

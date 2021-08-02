@@ -6,12 +6,12 @@ namespace App\Http\Requests;
 
 use App\Foundation\RequestFoundation;
 
-class AssetDestroyRequest extends RequestFoundation
+class AssetShowRequest extends RequestFoundation
 {
     public function rules(): array
     {
         return [
-            'asset' => 'required|integer|exists:assets',
+            'asset' => 'integer|exists:assets,id',
         ];
     }
 }
