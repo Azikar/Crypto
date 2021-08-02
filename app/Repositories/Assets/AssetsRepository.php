@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\Repositories\Assets;
 
-use App\Models\Asset\AssetInterface;
 use App\Repositories\Base\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 
 class AssetsRepository extends BaseRepository implements AssetRepositoryInterface
 {
     /**
      * UserRepository constructor.
      *
-     * @param AssetInterface $model
+     * @param Model $model
      */
-    public function __construct(AssetInterface $model)
+    public function __construct(Model $model)
     {
         parent::__construct($model);
     }
 
-    public function getUserAsset(int $userId, int $assetId): AssetInterface
+    public function getUserAsset(int $userId, int $assetId): Model
     {
         return $this->baseQuery()->where('user_id', $userId)->findOrFail($assetId);
     }
@@ -54,7 +54,7 @@ class AssetsRepository extends BaseRepository implements AssetRepositoryInterfac
         )->firstOrFail()->delete();
     }
 
-    public function updateUserAsset(int $userId, int $id, array $attributes): AssetInterface
+    public function updateUserAsset(int $userId, int $id, array $attributes): Model
     {
         $model = $this->getUserAsset($userId, $id);
         $model->fill($attributes)->save();

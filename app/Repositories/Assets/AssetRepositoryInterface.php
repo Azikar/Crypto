@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories\Assets;
 
-use App\Models\Asset\AssetInterface;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 interface AssetRepositoryInterface
 {
-    public function getUserAsset(int $userId, int $assetId): ?AssetInterface;
+    public function getUserAsset(int $userId, int $assetId): ?Model;
 
     public function getUserAssetsWithTotals(int $userId, string $currency): array;
 

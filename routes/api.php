@@ -15,7 +15,7 @@ use App\Http\Controllers\api\Assets\AssetsController;
 |
 */
 Route::middleware(['auth:api'])->group(function () {
-    Route::apiResource('assets', AssetsController::class);
+    Route::apiResource('assets', AssetsController::class)->where(['id' => '[0-9]+']);
 });
 
 Route::fallback(function(){

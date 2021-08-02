@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\Assets;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssetShowRequest;
 use App\Http\Requests\AssetStoreRequest;
 use App\Http\Resources\AssetDeleteResource;
 use App\Http\Resources\AssetResource;
@@ -39,7 +40,7 @@ class AssetsController extends Controller
      * @param  AssetStoreRequest  $assetStoreRequest
      * @return JsonResponse
      */
-    public function store(AssetStoreRequest $assetStoreRequest)
+    public function store(AssetStoreRequest $assetStoreRequest): JsonResponse
     {
         $data = $assetStoreRequest->validated();
         $data['user_id'] = Auth::id();
@@ -50,35 +51,31 @@ class AssetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return JsonResponse
      */
-    public function show(int $id): JsonResponse
+    public function show(AssetShowRequest $request): JsonResponse
     {
-        return response()->json(new AssetResource($this->assetRepository->getUserAsset(Auth::id(), $id)));
+        return response()->json(new AssetResource($this->assetRepository->getUserAsset(Auth::id(), $request->getIntParam('asset'))));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  AssetStoreRequest  $assetStoreRequest
-     * @param  int  $id
      * @return JsonResponse
      */
-    public function update(AssetStoreRequest $assetStoreRequest, int $id): JsonResponse
+    public function update(AssetStoreRequest $assetStoreRequest): JsonResponse
     {
-        return response()->json(new AssetResource($this->assetRepository->updateUserAsset(Auth::id(), $id, $assetStoreRequest->validated())));
-
+        return response()->json(new AssetResource($this->assetRepository->updateUserAsset(Auth::id(), $assetStoreRequest->getIntParam('asset'), $assetStoreRequest->validated())));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return JsonResponse
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(AssetShowRequest $request): JsonResponse
     {
-        return response()->json(new AssetDeleteResource($this->assetRepository->destroyUserAsset($id, Auth::id())));
+        return response()->json(new AssetDeleteResource($this->assetRepository->destroyUserAsset($request->getIntParam('asset'), Auth::id())));
     }
 }

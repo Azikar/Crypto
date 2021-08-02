@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Repositories\Rates;
 
-use App\Models\Rates\RatesInterface;
 use App\Repositories\Base\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 
 class RatesRepository extends BaseRepository implements RatesRepositoryInterface
 {
     /**
      * UserRepository constructor.
      *
-     * @param RatesInterface $model
+     * @param Model $model
      */
-    public function __construct(RatesInterface $model)
+    public function __construct(Model $model)
     {
         parent::__construct($model);
     }
